@@ -24,7 +24,6 @@ test('lets you add your own films', () => {
   expect(filmsShown.length).toEqual(1);
   expect(filmsShown[0].textContent).toEqual('The Codfather');
 
-
   fireEvent.change(inputField, { target: { value: 'Pietanic' } })
 
   submitButton.click();
@@ -33,4 +32,27 @@ test('lets you add your own films', () => {
   expect(filmsShown.length).toEqual(2);
   expect(filmsShown[0].textContent).toEqual('The Codfather');
   expect(filmsShown[1].textContent).toEqual('Pietanic');
+});
+
+test('lets you delete films', () => {
+  const wrapper = render(<App />);
+  const { getByLabelText, getByText } = wrapper;
+
+  const inputField = getByLabelText('Film Name');
+  fireEvent.change(inputField, { target: { value: 'The Codfather' } })
+
+  const submitButton = getByText('Add Film');
+  submitButton.click();
+
+  fireEvent.change(inputField, { target: { value: 'Pietanic' } })
+  submitButton.click();
+
+  let filmsShown = wrapper.container.querySelectorAll('.film');
+  expect(filmsShown.length).toEqual(2);
+
+  getByText('Pietanic').container.querySelector('.delete').click();
+
+  filmsShown = wrapper.container.querySelectorAll('.film');
+  expect(filmsShown.length).toEqual(1);
+  expect(filmsShown[0].textContent).toEqual('The Codfather');
 });

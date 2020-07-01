@@ -6,6 +6,8 @@ export default class List extends Component {
         this.state = {
           films: props.films
         };
+
+        this.deleteFilm = this.deleteFilm.bind(this);
     }
 
     componentDidUpdate() {
@@ -16,6 +18,10 @@ export default class List extends Component {
         }
     }
 
+    deleteFilm(filmName) {
+        this.props.deleteFilm(filmName);
+    }
+
     render() {
         return (
         <ul>
@@ -23,6 +29,11 @@ export default class List extends Component {
                 className='film'
                 key={film}>
                 {film}
+                <span
+                    className='delete'
+                    onClick={() => this.deleteFilm(film)}>
+                    X
+                </span>
             </li>)}
         </ul>);
     }

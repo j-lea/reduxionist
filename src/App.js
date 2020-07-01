@@ -13,6 +13,7 @@ class App extends Component {
         }
 
         this.addFilm = this.addFilm.bind(this);
+        this.deleteFilm = this.deleteFilm.bind(this);
     }
 
     addFilm(filmName) {
@@ -23,12 +24,25 @@ class App extends Component {
         });
     }
 
+    deleteFilm(filmName) {
+        const films = [...this.state.films];
+        const index = films.indexOf(filmName);
+
+        films.splice(index, 1);
+
+        this.setState({
+            films: films
+        });
+    }
+
     render() {
         return (
             <div>
                 <h2>Films to watch</h2>
-                <List films={this.state.films}/>
-                <NewFilmInput onSubmit={this.addFilm.bind(this)}/>
+                <List
+                    films={this.state.films}
+                    deleteFilm={this.deleteFilm}/>
+                <NewFilmInput onSubmit={this.addFilm}/>
             </div>
         );
     }
