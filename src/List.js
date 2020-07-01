@@ -8,6 +8,14 @@ export default class List extends Component {
         };
     }
 
+    componentDidUpdate() {
+        if (this.state.films !== this.props.films) {
+            this.setState({
+                films: this.props.films
+            });
+        }
+    }
+
     render() {
         return (
         <ul>
