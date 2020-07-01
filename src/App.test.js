@@ -20,7 +20,7 @@ test('lets you add your own films', () => {
   const submitButton = getByText('Add Film');
   submitButton.click();
 
-  let filmsShown = wrapper.container.querySelectorAll('.film');
+  let filmsShown = wrapper.container.querySelectorAll('.film .name');
   expect(filmsShown.length).toEqual(1);
   expect(filmsShown[0].textContent).toEqual('The Codfather');
 
@@ -28,7 +28,7 @@ test('lets you add your own films', () => {
 
   submitButton.click();
 
-  filmsShown = wrapper.container.querySelectorAll('.film');
+  filmsShown = wrapper.container.querySelectorAll('.film .name');
   expect(filmsShown.length).toEqual(2);
   expect(filmsShown[0].textContent).toEqual('The Codfather');
   expect(filmsShown[1].textContent).toEqual('Pietanic');
@@ -50,9 +50,9 @@ test('lets you delete films', () => {
   let filmsShown = wrapper.container.querySelectorAll('.film');
   expect(filmsShown.length).toEqual(2);
 
-  getByText('Pietanic').container.querySelector('.delete').click();
+  getByText('Pietanic').parentElement.querySelector('.delete').click();
 
-  filmsShown = wrapper.container.querySelectorAll('.film');
+  filmsShown = wrapper.container.querySelectorAll('.film .name');
   expect(filmsShown.length).toEqual(1);
   expect(filmsShown[0].textContent).toEqual('The Codfather');
 });

@@ -6,7 +6,7 @@ test('renders all films given to it', () => {
     const films = ['a', 'bb', 'ccc']
     const wrapper = render(<List films={films} />);
 
-    const filmsShown = wrapper.container.querySelectorAll('.film');
+    const filmsShown = wrapper.container.querySelectorAll('.film .name');
     const filmNamesShown = Array.from(filmsShown).map(filmElem => filmElem.textContent)
     expect(filmNamesShown).toEqual(films);
 });

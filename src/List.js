@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ListItem from "./ListItem";
 
 export default class List extends Component {
     constructor(props) {
@@ -25,16 +26,9 @@ export default class List extends Component {
     render() {
         return (
         <ul>
-            {this.state.films.map(film => <li
-                className='film'
-                key={film}>
-                {film}
-                <span
-                    className='delete'
-                    onClick={() => this.deleteFilm(film)}>
-                    X
-                </span>
-            </li>)}
+            {this.state.films.map(film =>
+                <ListItem key={film} itemName={film} onDelete={() => this.deleteFilm(film)}/>
+            )}
         </ul>);
     }
 }
